@@ -30,6 +30,7 @@ class EventData(models.Model):
     event_host = models.CharField(max_length=255,blank=True, null=True)
     client_profile = models.ForeignKey(ClientProfile, on_delete=models.CASCADE, related_name='events')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='events')
+    event_image = models.ImageField(upload_to='images', blank=True, null=False, verbose_name='Image upload')
 
     def __str__(self):
         return self.event_name

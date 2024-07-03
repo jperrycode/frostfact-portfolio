@@ -9,6 +9,7 @@ markdown = "*"
 django-filter = "*"
 python-dotenv = "*"
 whitenoise = "*"
+pillow = "*"
 
 [dev-packages]
 

@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class ClientProfile(models.Model):
-    client_name = models.CharField(max_length=255)
+    client_f_name = models.CharField(max_length=255, blank=True, null=True)
+    client_l_name = models.CharField(max_length=255, blank=True, null=True)
     client_business = models.CharField(max_length=255)
     client_phone = models.CharField(max_length=15, blank=True, null=True)
     address = models.CharField(max_length=255, blank=True, null=True)
@@ -17,6 +18,8 @@ class ContactFormSubmission(models.Model):
     client_profile = models.ForeignKey(ClientProfile, on_delete=models.CASCADE, related_name='contact_submissions')
     customer_email = models.EmailField()
     subject = models.CharField(max_length=255,blank=True, null=True)
+    f_name = models.CharField(max_length=255, blank=True, null=True)
+    l_name = models.CharField(max_length=255, blank=True, null=True)
     message = models.TextField()
     time_stamp = models.DateTimeField(auto_now_add=True)
     condition = models.CharField(max_length=255, blank=True, null=True)

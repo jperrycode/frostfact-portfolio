@@ -11,5 +11,15 @@ class ContactFormApiView(APIView):
 class EventApiView(APIView):
     pass
 
+
 class ClientApiView(APIView):
-    pass
+
+    def get(self, request, slug, *args, **kwargs):
+        # Retrieve the client profile by slug
+        client_profile = get_object_or_404(ClientProfile, slug=slug)
+
+        # Serialize the data
+        serializer = ClientProfileSerializer(client_profile)
+
+        # Return the serialized data
+        return Response(serializer.data, status=status.HTTP_200_OK)

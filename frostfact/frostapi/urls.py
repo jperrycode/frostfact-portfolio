@@ -11,7 +11,7 @@ from . import views
 urlpatterns = [
     path('contact-fsf/', ContactFormApiView.as_view(), name='cont_form_data'),
     path('event-fst/', EventApiView.as_view(), name='cont_form_data'),
-    path('client-data/', ClientApiView.as_view(), name='cont_form_data'),
-    ath('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('client-data/<slug:slug>/', ClientApiView.as_view(), name='client_data'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]

@@ -9,8 +9,23 @@ from rest_framework import generics
 
 
 # Create your views here.
-class ContactFormApiView(APIView):
-    pass
+
+
+class ContactFormApiView(generics.GenericAPIView):
+    queryset = ContactFormSubmission.objects.all()
+    serializer_class = EventDataSerializer
+
+    def get(self, request, slug=None, *args, **kwargs):
+        if slug:
+            # Retrieve a single client profile by slug
+            contact_profile = generics.get_object_or_404(ContactFormSubmission, slug=slug)
+            serializer = self.get_serializer(contact_profile)
+            return Response(serializer.data)
+        else:
+            # Retrieve all client profiles
+            contact_profiles = self.get_queryset()
+            serializer = self.get_serializer(contact_profiles, many=True)
+            return Response(serializer.data)
 
 class EventApiView(generics.GenericAPIView):
     queryset = EventData.objects.all()

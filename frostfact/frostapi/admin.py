@@ -1,19 +1,17 @@
 from django.contrib import admin
-from .models import ClientProfile, ContactFormSubmission, EventData
-from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import UserProfile
+from .models import UserProfile, ClientProfile, ContactFormSubmission, EventData
 
 class UserProfileInline(admin.StackedInline):
     model = UserProfile
     can_delete = False
     fields = ('jwt_token',)  # Specify fields to display
 
-@admin.register(User)
-class UserAdmin(admin.ModelAdmin):
+class CustomUserAdmin(BaseUserAdmin):
     inlines = [UserProfileInline]
     actions = ['generate_jwt_token']
 
@@ -37,12 +35,13 @@ class UserAdmin(admin.ModelAdmin):
 
     generate_jwt_token.short_description = "Generate JWT Token"
 
-# Ensure models are registered only once
-if not admin.site.is_registered(User):
-    admin.site.register(User, UserAdmin)
+# Unregister the default User admin
+admin.site.unregister(User)
+# Register the custom User admin
+admin.site.register(User, CustomUserAdmin)
 
-if not admin.site.is_registered(UserProfile):
-    admin.site.register(UserProfile)
+
+
 
 
 @admin.register(ClientProfile)

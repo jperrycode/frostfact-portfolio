@@ -22,6 +22,10 @@ if ENVIRONMENT in ['development', 'staging']:
 ALLOWED_HOSTS = []
 PIPENV_VERBOSITY=-1
 
+
+
+
+
 SECRET_KEY = str(os.getenv('DJANGO_SECRET_KEY'))
 AWS_ACCESS_KEY_ID = str(os.getenv('AWS_ACCESS_KEY_ID'))
 AWS_SECRET_ACCESS_KEY = str(os.getenv('AWS_SECRET_ACCESS_KEY'))
@@ -76,6 +80,7 @@ elif ENVIRONMENT == 'staging':
     SECURE_SSL_REDIRECT = False
 
 else:  # Development
+    CORS_ORIGIN_ALLOW_ALL = True
     DEBUG = True
     ALLOWED_HOSTS = []
     DATABASES = {
@@ -84,6 +89,10 @@ else:  # Development
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:8080",
+        "http://127.0.0.1:9000",
+    ]
 
 # Application definition
 
@@ -94,6 +103,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "corsheaders",
     'rest_framework',
     'frostapi',
     'rest_framework_simplejwt',
@@ -103,12 +113,14 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'frostfact.urls'

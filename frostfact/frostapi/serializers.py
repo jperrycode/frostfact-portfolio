@@ -8,7 +8,6 @@ class ContactFormSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class EventDataSerializer(serializers.ModelSerializer):
-    time_stamp = serializers.DateTimeField(format='%Y-%m-%d %H:%M:%S')
     class Meta:
         model = EventData
         fields = '__all__'

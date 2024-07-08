@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils.text import slugify
 
 
 class UserProfile(models.Model):
@@ -114,8 +115,8 @@ class ContactFormSubmission(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.client_business)
-        super(ClientProfile, self).save(*args, **kwargs)
+            self.slug = slugify(self.last_name)
+        super(ContactFormSubmission, self).save(*args, **kwargs)
 
     def __str__(self):
         return f"Submission by {self.customer_email} on {self.time_stamp}"
@@ -151,6 +152,11 @@ class EventData(models.Model):
         blank=True,
         verbose_name='Image Upload'
     )
+    slug = models.SlugField(unique=True, blank=True, null=True, verbose_name="Slug")
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.event_name)
+        super(EventData, self).save(*args, **kwargs)
     def __str__(self):
         return self.event_name

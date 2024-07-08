@@ -22,8 +22,25 @@ if ENVIRONMENT in ['development', 'staging']:
 ALLOWED_HOSTS = []
 PIPENV_VERBOSITY=-1
 
-
-
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS'
+]
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
 
 
 SECRET_KEY = str(os.getenv('DJANGO_SECRET_KEY'))

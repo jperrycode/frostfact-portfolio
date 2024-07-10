@@ -123,7 +123,7 @@ INSTALLED_APPS = [
     "corsheaders",
     'rest_framework',
     'frostapi',
-    'rest_framework_simplejwt',
+
 ]
 
 MIDDLEWARE = [

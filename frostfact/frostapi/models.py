@@ -5,12 +5,7 @@ from django.dispatch import receiver
 from django.utils.text import slugify
 
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    jwt_token = models.TextField(blank=True, null=True)
 
-    def __str__(self):
-        return self.user.username
 
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
@@ -120,6 +115,25 @@ class ContactFormSubmission(models.Model):
 
     def __str__(self):
         return f"Submission by {self.customer_email} on {self.time_stamp}"
+
+    @receiver(post_save, sender=ContactFormSubmission)
+    def execute_after_save(sender, instance, created, **kwargs):
+        if created:
+            # Execute custom logic after saving ContactFormSubmission
+            instance.run_after_save()
+
+    def run_after_save(self):
+        if self.client_profile_id:
+            try:
+                client_profile = self.client_profile
+            except ClientProfile.DoesNotExist:
+                client_profile = ClientProfile.objects.create()
+
+            # Update fields in ClientProfile based on ContactFormSubmission
+            client_profile.name = f"{self.first_name} {self.last_name}"
+            client_profile.name = f"{self.first_name} {self.last_name}"
+            client_profile.save()
+
 
 class EventData(models.Model):
     event_name = models.CharField(

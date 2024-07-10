@@ -13,7 +13,7 @@ from rest_framework import generics
 
 class ContactFormApiView(generics.GenericAPIView):
     queryset = ContactFormSubmission.objects.all()
-    serializer_class = EventDataSerializer
+    serializer_class = ContactFormSerializer
 
     def get(self, request, slug=None, *args, **kwargs):
         if slug:
@@ -26,6 +26,10 @@ class ContactFormApiView(generics.GenericAPIView):
             contact_profiles = self.get_queryset()
             serializer = self.get_serializer(contact_profiles, many=True)
             return Response(serializer.data)
+
+    def perform_create(self, serializer):
+        # Customize saving behavior if needed
+        serializer.save()
 
 class EventApiView(generics.GenericAPIView):
     queryset = EventData.objects.all()

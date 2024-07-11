@@ -51,6 +51,7 @@ class EventApiView(generics.GenericAPIView):
 class ClientApiView(generics.GenericAPIView):
     queryset = ClientProfile.objects.all()
     serializer_class = ClientProfileSerializer
+    ordering_fields = ('start_datetime',)
 
     def get(self, request, slug=None, *args, **kwargs):
         if slug:

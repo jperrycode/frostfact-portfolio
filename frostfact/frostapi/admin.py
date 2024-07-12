@@ -1,54 +1,26 @@
-from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.contrib.auth.models import User
-from django.urls import reverse
-from django.http import HttpResponseRedirect
+# admin.py
 
+from django.contrib import admin
 from .models import ClientProfile, ContactFormSubmission, EventData
 
-# class UserProfileInline(admin.StackedInline):
-#     model = UserProfile
-#     can_delete = False
-#     fields = ('jwt_token',)  # Specify fields to display
-#
-# class CustomUserAdmin(BaseUserAdmin):
-#     inlines = [UserProfileInline]
-#     actions = ['generate_jwt_token']
-#
-#     def generate_jwt_token(self, request, queryset):
-#         if queryset.count() == 1:
-#             user = queryset.first()
-#             refresh = RefreshToken.for_user(user)
-#             access_token = str(refresh.access_token)
-#
-#             # Save the token to the user's profile
-#             user_profile, created = UserProfile.objects.get_or_create(user=user)
-#             user_profile.jwt_token = access_token
-#             user_profile.save()
-#
-#             self.message_user(request, f"Access Token: {access_token} (saved to user profile)")
-#             return HttpResponseRedirect(reverse('admin:auth_user_changelist'))
-#
-#         self.message_user(request, "Please select exactly one user.", level='error')
-#
-#         return None
-#
-#     generate_jwt_token.short_description = "Generate JWT Token"
-#
-# # Unregister the default User admin
-# admin.site.unregister(User)
-# # Register the custom User admin
-# admin.site.register(User, CustomUserAdmin)
+class ContactFormSubmissionInline(admin.StackedInline):
+    model = ContactFormSubmission
+    extra = 0  # Do not show extra empty forms
+    fields = ('customer_email', 'subject', 'message', 'time_stamp')  # Fields to display
+    readonly_fields = ('time_stamp',)
 
-
-
-
+class EventDataInline(admin.StackedInline):
+    model = EventData
+    extra = 0  # Do not show extra empty forms
+    fields = ('event_name', 'event_date', 'event_host', 'event_image')  # Fields to display
+    readonly_fields = ('event_date',)
 
 @admin.register(ClientProfile)
 class ClientProfileAdmin(admin.ModelAdmin):
     list_display = ('client_last_name', 'client_first_name', 'client_business', 'client_phone', 'client_email', 'client_event_space', 'client_special_needs')
     search_fields = ["client_first_name", "client_email"]
     readonly_fields = ('slug',)
+    inlines = [ContactFormSubmissionInline, EventDataInline]
 
 @admin.register(ContactFormSubmission)
 class ContactFormSubmissionAdmin(admin.ModelAdmin):

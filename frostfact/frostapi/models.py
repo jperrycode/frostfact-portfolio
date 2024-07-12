@@ -237,6 +237,7 @@ class ClientProfile(models.Model):
 class ContactFormSubmission(models.Model):
     customer_email = models.EmailField(verbose_name="Customer's Email")
     subject = models.CharField(max_length=255, blank=True, null=True, verbose_name="Subject")
+    client_profile = models.ForeignKey(ClientProfile, on_delete=models.CASCADE, related_name='contact_forms', verbose_name="Client Profile", null=True)
     phone = models.CharField(max_length=12, blank=True, null=True, verbose_name="Phone Number")
     first_name = models.CharField(max_length=255, blank=True, null=True, verbose_name="First Name")
     last_name = models.CharField(max_length=255, blank=True, null=True, verbose_name="Last Name")

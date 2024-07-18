@@ -19,6 +19,7 @@ if ENVIRONMENT in ['development', 'staging']:
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
+
 ALLOWED_HOSTS = []
 PIPENV_VERBOSITY=-1
 
@@ -125,6 +126,7 @@ INSTALLED_APPS = [
     "corsheaders",
     'rest_framework',
     'frostapi',
+    'rest_framework.authtoken',
 
 ]
 
@@ -195,7 +197,6 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',

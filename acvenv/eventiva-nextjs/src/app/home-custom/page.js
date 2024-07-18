@@ -29,13 +29,6 @@ import FooterOne from '@/components/common/footers/FooterOne'
 
 import Aos from 'aos'
 import 'aos/dist/aos.css';
-import NavbarThree from '@/components/common/navbars/NavbarThree'
-import NavbarTwo from '@/components/common/navbars/NavbarTwo'
-import NavbarFour from '@/components/common/navbars/NavbarFour'
-import NavbarFive from '@/components/common/navbars/NavbarFive'
-import NavbarSix from '@/components/common/navbars/NavbarSix'
-import NavbarSeven from '@/components/common/navbars/NavbarSeven'
-import NavbarOffcanvas from '@/components/common/navbars/NavbarOffcanvas'
 
 
 export default function Home() {
@@ -47,13 +40,6 @@ export default function Home() {
   return (
     <>
       <NavbarOne />
-      {/* <NavbarTwo /> */}
-      {/* <NavbarThree /> */}
-      {/* <NavbarFour /> */}
-      {/* <NavbarFive /> */}
-      {/* <NavbarSix /> */}
-      {/* <NavbarSeven /> */}
-      {/* <NavbarOffcanvas /> */}
       <main>
         <BannerCustom />
         <Gallery styleNum={0} />

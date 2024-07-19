@@ -8,7 +8,7 @@ import { Open_Sans, Poppins, Plus_Jakarta_Sans, Roboto } from "next/font/google"
 
 
 export const metadata = {
-  title: 'Eventiva next.js template',
+  title: 'Castle in the Sky Brooklyn',
   description: 'Eventiva next.js multipage webdite with next.js and bootstrap',
   icons: {
     icon: `${logo.src}`,

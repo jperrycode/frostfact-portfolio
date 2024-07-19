@@ -27,13 +27,13 @@ const LineupCustom = () => {
                     <div className="col-lg-4">
                         <div className="lineup-right-content mt-30 mt-lg-0" >
                             <div className="section-title section-title-style-2 mb-4 mb-lg-30 mb-xxl-40">
-                                <SectionName
+                                {/* <SectionName
                                     name={"Line-Up"}
                                     className={"fs-3"}
-                                />
+                                /> */}
                                 <SectionTitle
-                                    title={"Rhythm"}
-                                    subTitle={"Revelations"}
+                                    title={"Upcoming"}
+                                    subTitle={"Events"}
                                     titleClass={""}
                                     subTitleClass={""}
                                 />
@@ -41,7 +41,7 @@ const LineupCustom = () => {
                             </div>
                             {/* -- section-title -- */}
                             <SectionDesc
-                                desc={"Unleash the rhythm with an extraordinary lineup. Get ready for a musical extravaganza that will captivate your senses."}
+                                desc={"In Brooklyn, we go hard, but we play even harder. Our high-energy vibe and attention to detail ensure that your celebration will be a standout experience. From electrifying lights and top-notch sound equipment to eclectic decor, we have everything you need to say you threw an authentic Brooklyn warehouse party. "}
                                 className={"mb-4 mb-lg-30"}
                             />
 

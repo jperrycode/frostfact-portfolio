@@ -45,13 +45,13 @@ const ScheduleSeven = ({ styleNum }) => {
                         <div className="sticky-contents">
                             <div className="schedule-left-content wow fadeInRight">
                                 <div className="section-title section-title-style-2 mb-30 mb-lg-40 mb-xxl-60">
-                                    <SectionName
+                                    {/* <SectionName
                                         name={"Schedule"}
                                         className={""}
-                                    />
+                                    /> */}
                                     <SectionTitleTwo
-                                        title={"Melody"}
-                                        subTitle={"Agenda"}
+                                        title={"Event"}
+                                        subTitle={"Schedule"}
                                         titleClass={""}
                                         subTitleClass={"primary-text-shadow"}
                                     />

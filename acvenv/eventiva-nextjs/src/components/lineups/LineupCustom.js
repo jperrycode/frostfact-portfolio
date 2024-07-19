@@ -27,10 +27,10 @@ const LineupCustom = () => {
                     <div className="col-lg-4">
                         <div className="lineup-right-content mt-30 mt-lg-0" >
                             <div className="section-title section-title-style-2 mb-4 mb-lg-30 mb-xxl-40">
-                                {/* <SectionName
-                                    name={"Line-Up"}
+                                <SectionName
+                                    name={"We Go Hard"}
                                     className={"fs-3"}
-                                /> */}
+                                />
                                 <SectionTitle
                                     title={"Upcoming"}
                                     subTitle={"Events"}

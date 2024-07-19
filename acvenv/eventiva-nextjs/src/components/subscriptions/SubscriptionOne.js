@@ -166,7 +166,7 @@ const SubscriptionOne = ({ styleNum }) => {
                                     </svg>
                                 </span>
 
-                                <div className="map-popup-content"><h3 className={`${addressClassName}`}>Castles in the Sky</h3><p className={`${addressClass}`}>148 Frost St, Brooklyn, NY</p>
+                                <div className="map-popup-content"><h3 className={`${addressClassName}`}>Castle in the Sky</h3><p className={`${addressClass}`}>148 Frost St, Brooklyn, NY</p>
                                     <Link onClick={(() => seEl(true))} id="mapDirectionBtn" href="#" className={`btn ${directionBtn} btn-sm d-flex align-items-center justify-content-center custom-roboto gap-10 btn-map-direction`} data-bs-toggle="modal" data-bs-target="#RoutingMapModal">Get Directions <RightArrow /> </Link>
                                 </div>
                             </div>

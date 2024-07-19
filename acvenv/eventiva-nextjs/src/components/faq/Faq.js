@@ -41,7 +41,7 @@ const Faq = ({ styleNum }) => {
                         <div className="sticky-contents">
                             <div className="section-title section-title-style-2 mb-30 mb-lg-40 mb-xxl-60">
                                 <SectionName
-                                    name={"Solutions for Your Curiosities"}
+                                    name={"Frequently Asked Questions"}
                                     className={""}
                                 />
                                 {
@@ -54,8 +54,8 @@ const Faq = ({ styleNum }) => {
                                         />
                                         :
                                         <SectionTitle
-                                            title={"Harmony"}
-                                            subTitle={"Helpdesk"}
+                                            title={"Venue"}
+                                            subTitle={"Policies"}
                                             titleClass={""}
                                             subTitleClass={""}
                                         />

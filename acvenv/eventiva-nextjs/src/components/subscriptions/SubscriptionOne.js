@@ -116,7 +116,7 @@ const SubscriptionOne = ({ styleNum }) => {
                             <div className="subscription-left-content wow fadeInRight" >
                                 <div className={`section-title ${sectionWapperClass} mb-4 mb-lg-5`}>
                                     <SectionName
-                                        name={` ${sectionName ? "Schedule" : "Join the Harmonious Beat"} `}
+                                        name={` ${sectionName ? "Address" : "Join the Harmonious Beat"} `}
                                         className={""}
                                     />
                                     {
@@ -129,8 +129,8 @@ const SubscriptionOne = ({ styleNum }) => {
                                             />
                                             :
                                             <SectionTitle
-                                                title={"Sonic"}
-                                                subTitle={"Dispatch"}
+                                                title={"148 Frost Street"}
+                                                subTitle={"Brookyn, NY"}
                                                 titleClass={""}
                                                 subTitleClass={subTitleClass}
                                             />
@@ -159,15 +159,15 @@ const SubscriptionOne = ({ styleNum }) => {
 
                         <div className="col-lg-5 wow fadeInLeft">
 
-                            <h3 className="straight-line-wrapper fw-semibold position-relative mb-20"> <span className="straight-line"></span>Harmonia Wayfinder</h3>
+                            <h3 className="straight-line-wrapper fw-semibold position-relative mb-20"> <span className="straight-line"></span>Where We're At</h3>
                             <div className="map-image parallax position-relative">
                                 <span className={`map-marker ${markerClr}`}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-geo-alt-fill" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
                                     </svg>
                                 </span>
 
-                                <div className="map-popup-content"><h3 className={`${addressClassName}`}>Basement</h3><p className={`${addressClass}`}>135W, 46nd Street, New York</p>
-                                    <Link onClick={(() => seEl(true))} id="mapDirectionBtn" href="#" className={`btn ${directionBtn} btn-sm d-flex align-items-center justify-content-center custom-roboto gap-10 btn-map-direction`} data-bs-toggle="modal" data-bs-target="#RoutingMapModal">Get Direction <RightArrow /> </Link>
+                                <div className="map-popup-content"><h3 className={`${addressClassName}`}>Castles in the Sky</h3><p className={`${addressClass}`}>148 Frost St, Brooklyn, NY</p>
+                                    <Link onClick={(() => seEl(true))} id="mapDirectionBtn" href="#" className={`btn ${directionBtn} btn-sm d-flex align-items-center justify-content-center custom-roboto gap-10 btn-map-direction`} data-bs-toggle="modal" data-bs-target="#RoutingMapModal">Get Directions <RightArrow /> </Link>
                                 </div>
                             </div>
 

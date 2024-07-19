@@ -21,6 +21,12 @@ const ScrollSection2 = ({prentClass}) => {
                     </Marquee>
                 </div>
             </div>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         </div>
     )
 }

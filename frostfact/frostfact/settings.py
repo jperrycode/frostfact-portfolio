@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import os
 import sys
 from datetime import timedelta
+import base64
 
 
 
@@ -112,7 +113,7 @@ else:  # Development
     CORS_ALLOWED_ORIGINS = [
         "http://localhost:8080",
         "http://127.0.0.1:9000",
-        '*',
+
     ]
 
 # Application definition
@@ -127,7 +128,7 @@ INSTALLED_APPS = [
     "corsheaders",
     'rest_framework',
     'frostapi',
-    'rest_framework.authtoken',
+
 
 ]
 
@@ -197,7 +198,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
+        'frostapi.authentication.CustomHeaderAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -205,7 +206,8 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',  # drf-spectacular settings
 }
 
-
+API_TOKEN_USER_AUTH_KEY = os.environ.get('API_TOKEN_USER_AUTH_KEY')
+API_TOKEN_USER_AUTH_VALUE = os.environ.get('API_TOKEN_USER_AUTH_VALUE')
 
 LANGUAGE_CODE = 'en-us'
 
@@ -217,7 +219,9 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]

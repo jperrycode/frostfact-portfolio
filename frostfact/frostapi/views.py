@@ -1,16 +1,38 @@
+# views.py
 from django.shortcuts import get_object_or_404
-from rest_framework import generics
+from rest_framework import generics, permissions
 from rest_framework.response import Response
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
-from .serializers import *
-from .models import *
+from rest_framework.exceptions import AuthenticationFailed
+from base64 import b64decode
+from .serializers import ContactFormSerializer, EventDataSerializer, ClientProfileSerializer
+from .models import ContactFormSubmission, EventData, ClientProfile
+from django.contrib.auth.models import User
 
 class BaseAuthenticatedView(generics.GenericAPIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_credentials(self, request):
+        auth_header = request.headers.get('Authorization')
+        if auth_header and auth_header.startswith('Basic '):
+            encoded_credentials = auth_header.split(' ')[1]
+            decoded_credentials = b64decode(encoded_credentials).decode('utf-8')
+            username, password = decoded_credentials.split(':')
+            return username, password
+        return None, None
+
+    def authenticate(self, request):
+        username, password = self.get_credentials(request)
+        if not username or not password:
+            raise AuthenticationFailed('Invalid credentials')
+        try:
+            user = User.objects.get(username=username)
+            if not user.check_password(password):
+                raise AuthenticationFailed('Invalid username/password')
+        except User.DoesNotExist:
+            raise AuthenticationFailed('Invalid username/password')
 
     def get(self, request, slug=None, *args, **kwargs):
+        self.authenticate(request)
         if slug:
             instance = get_object_or_404(self.get_queryset(), slug=slug)
             serializer = self.get_serializer(instance)
@@ -19,18 +41,23 @@ class BaseAuthenticatedView(generics.GenericAPIView):
             serializer = self.get_serializer(instances, many=True)
         return Response(serializer.data)
 
-    def perform_create(self, serializer):
-        serializer.save()
+    def post(self, request, *args, **kwargs):
+        self.authenticate(request)
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            self.perform_create(serializer)
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
 
-class ContactFormApiView(BaseAuthenticatedView):
+class ContactFormApiView(BaseAuthenticatedView, generics.ListCreateAPIView):
     queryset = ContactFormSubmission.objects.all()
     serializer_class = ContactFormSerializer
 
-class EventApiView(BaseAuthenticatedView):
+class EventApiView(BaseAuthenticatedView, generics.ListCreateAPIView):
     queryset = EventData.objects.all()
     serializer_class = EventDataSerializer
 
-class ClientApiView(BaseAuthenticatedView):
+class ClientApiView(BaseAuthenticatedView, generics.ListCreateAPIView):
     queryset = ClientProfile.objects.all()
     serializer_class = ClientProfileSerializer
     ordering_fields = ('start_datetime',)

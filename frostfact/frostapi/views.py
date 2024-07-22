@@ -41,6 +41,8 @@ class BaseAuthenticatedView(generics.GenericAPIView):
             serializer = self.get_serializer(instances, many=True)
         return Response(serializer.data)
 
+
+
     def post(self, request, *args, **kwargs):
         self.authenticate(request)
         serializer = self.get_serializer(data=request.data)
@@ -61,3 +63,5 @@ class ClientApiView(BaseAuthenticatedView, generics.ListCreateAPIView):
     queryset = ClientProfile.objects.all()
     serializer_class = ClientProfileSerializer
     ordering_fields = ('start_datetime',)
+
+

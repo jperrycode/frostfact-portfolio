@@ -101,9 +101,10 @@
 // ======================== Hero-2 ==========================>>>>
 .hero-2{    
     .hero-wrapper {        
-        --bg-parallax-image: url(../images/home-2/hero-2-bg.jpg);    
+        --bg-parallax-image: url(../images/hero-beastieboys.jpg);
         --bg-parallax-opacity: 1;
-        padding: 380px 0 145px 0;
+        // padding: 380px 0 145px 0;
+        padding: 500px 0 145px 0;
         @include media-breakpoint-down(xxl) {
             padding: 230px 0 160px 0;            
         }                

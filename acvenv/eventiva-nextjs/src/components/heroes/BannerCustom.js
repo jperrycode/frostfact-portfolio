@@ -12,7 +12,7 @@ const BannerCustom = () => {
                         <h1 className="soundscapes fs-120 fw-extra-bold mb-0">Castle in the Sky<br/>Brooklyn NYC</h1>
                     </div>
                 </div>
-                <EventDate styleNum={1} />
+                {/* <EventDate styleNum={1} /> */}
             </div>
         </section>
     )

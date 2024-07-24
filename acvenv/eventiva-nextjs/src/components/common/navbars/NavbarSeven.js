@@ -17,6 +17,7 @@ import { usePathname } from 'next/navigation'
 import NavbarOffcanvas from './NavbarOffcanvas'
 import Cart from './Cart'
 import { menuList } from '@/lib/menuList'
+import castle_logo from '@/assets/images/castlev2.png'
 
 const NavbarSeven = () => {
     const pathName = usePathname()
@@ -25,13 +26,12 @@ const NavbarSeven = () => {
 
     return (
         <>
-            <header className="header-section header-4 sticky-navbar">
+            <header className="header-section header-4">
                 <div className="container-fluid">
                     <nav className="navbar navbar-expand-lg">
                         <div className="d-flex w-100 justify-content-between align-items-center">
                             <Link className="navbar-brand" href="/" aria-label="nav-brands">
-                                <Image src={landing_logo} className="logo-light" alt="logo" />
-                                <Image src={landing_logo_dark} className="logo-dark" alt="logo" />
+                                <Image src={castle_logo} className="logo-light" alt="logo" style={{height: '100px', width: 'auto'}}/>
                             </Link>
 
                             <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navContentmenu" aria-controls="navContentmenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,10 +73,10 @@ const NavbarSeven = () => {
 
                             <div className="d-none d-lg-block">
                                 <div className="d-flex gap-40 align-items-center">
-                                    <Link href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasShop" aria-controls="offcanvasShop" aria-expanded="false" aria-label="Toggle navigation"><span className="shop-icon-xl"> <ShopIcon height={"46"} width={"42"} /> </span></Link>
+                                    {/* <Link href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasShop" aria-controls="offcanvasShop" aria-expanded="false" aria-label="Toggle navigation"><span className="shop-icon-xl"> <ShopIcon height={"46"} width={"42"} /> </span></Link> */}
                                     <ButtonFill className={" btn-rounded gap-2"} link={"#pricing"}>
-                                        <TicketIcon height={"25"} width={"25"} />
-                                        Buy Ticket
+                                        {/* <TicketIcon height={"25"} width={"25"} /> */}
+                                        Book Now
                                     </ButtonFill>
 
                                 </div>
@@ -85,8 +85,8 @@ const NavbarSeven = () => {
                     </nav>
                 </div>
             </header>
-            <NavbarOffcanvas img={logo} />
-            <Cart />
+            {/* <NavbarOffcanvas img={logo} />
+            <Cart /> */}
         </>
     )
 }

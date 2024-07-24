@@ -48,13 +48,13 @@ export default function Home() {
 
   return (
     <>
-      <NavbarCustom />
+      {/* <NavbarCustom /> */}
       {/* <NavbarTwo /> */}
       {/* <NavbarThree /> */}
       {/* <NavbarFour /> */}
       {/* <NavbarFive /> */}
       {/* <NavbarSix /> */}
-      {/* <NavbarSeven /> */}
+      <NavbarSeven />
       {/* <NavbarOffcanvas /> */}
       <main>
         <BannerCustom />

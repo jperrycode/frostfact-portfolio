@@ -252,11 +252,11 @@
     box-shadow: 1px 0px 39px 0px rgba(0, 0, 0, 0.10);
     backdrop-filter: blur(12.5px); 
     .navbar{   
-        --#{$prefix}navbar-padding-x: 40px;
-        --#{$prefix}navbar-padding-y: 24px;
+        --#{$prefix}navbar-padding-x: 70px;
+        --#{$prefix}navbar-padding-y: 5px;
         --#{$prefix}navbar-hover-color: var(--#{$prefix}primary);
         --#{$prefix}navbar-active-color:var(--#{$prefix}secondary);           
-        --#{$prefix}navbar-color:#5B5C66; 
+        --#{$prefix}navbar-color:#ffffff; 
         
         .nav-link{
             --#{$prefix}nav-link-font-weight: 600;
@@ -280,8 +280,8 @@
     } 
     &.sticky{  
         .navbar{
-            --#{$prefix}navbar-padding-x: 18px;
-            --#{$prefix}navbar-padding-y: 8px;
+            --#{$prefix}navbar-padding-x: 70px;
+            --#{$prefix}navbar-padding-y: 5px;
         }
     }    
 }

@@ -34,7 +34,7 @@ class ClientProfile(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = generate_unique_slug(ClientProfile, self.client_business)
+            self.slug = generate_unique_slug(ClientProfile, f'{self.client_first_name}-{self.client_last_name}')
         super(ClientProfile, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -48,7 +48,7 @@ class ContactFormSubmission(models.Model):
     first_name = models.CharField(max_length=255, blank=True, null=True, verbose_name="First Name")
     last_name = models.CharField(max_length=255, blank=True, null=True, verbose_name="Last Name")
     message = models.TextField(verbose_name="Message")
-    time_stamp = models.DateTimeField(auto_now_add=True, verbose_name="Timestamp")
+    time_stamp = models.DateTimeField(auto_now_add=True, verbose_name="Timestamp", blank=True, null=True)
     condition = models.CharField(max_length=255, blank=True, null=True, verbose_name="Condition")
     slug = models.SlugField(unique=True, blank=True, null=True, verbose_name="Contact Slug", editable=False)
 

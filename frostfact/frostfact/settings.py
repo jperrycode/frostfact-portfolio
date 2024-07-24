@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import os
 import sys
 from datetime import timedelta
+import base64
 
 
 
@@ -18,6 +19,7 @@ if ENVIRONMENT in ['development', 'staging']:
     load_dotenv(dotenv_path)
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
 
 ALLOWED_HOSTS = []
 PIPENV_VERBOSITY=-1
@@ -111,6 +113,7 @@ else:  # Development
     CORS_ALLOWED_ORIGINS = [
         "http://localhost:8080",
         "http://127.0.0.1:9000",
+
     ]
 
 # Application definition
@@ -126,6 +129,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'frostapi',
 
+
 ]
 
 MIDDLEWARE = [
@@ -139,7 +143,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'frostfact.urls'
@@ -194,8 +198,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
+        'frostapi.authentication.CustomHeaderAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -203,7 +206,8 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',  # drf-spectacular settings
 }
 
-
+API_TOKEN_USER_AUTH_KEY = os.environ.get('API_TOKEN_USER_AUTH_KEY')
+API_TOKEN_USER_AUTH_VALUE = os.environ.get('API_TOKEN_USER_AUTH_VALUE')
 
 LANGUAGE_CODE = 'en-us'
 
@@ -215,7 +219,9 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]

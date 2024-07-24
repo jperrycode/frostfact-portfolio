@@ -1,58 +1,139 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { getCSRFToken } from '../utils/csrf'; // Assuming you have this utility function
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    customer_email: '',
+    subject: '',
+    phone: '',
+    first_name: '',
+    last_name: '',
+    message: ''
+  });
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [id]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('https://your-django-api.com/contact-submission/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCSRFToken(),
+        },
+        credentials: 'include',
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        console.log('Form submitted successfully');
+        // Reset form or show success message
+      } else {
+        console.error('Form submission failed');
+        // Show error message
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Show error message
+    }
+  };
+
   return (
     <section className="contact-section contact-page pt-70 pt-lg-120 pt-xxl-150">
-    <div className="container">
-        <div className="row gy-20 gy-lg-0 align-items-lg-end justify-content-lg-between mb-30 mb-lg-70">
-            <div className="col-lg-5">
-                <div className="section-title section-title-style-2 wow fadeInRight">
-                    <span className="fs-3 straight-line-wrapper fw-semibold position-relative"> <span className="straight-line"></span>Contact</span>
-                    <h2 className="title display-3 fw-extra-bold mb-n2 text-opacity">Music</h2>
-                    <h3 className="sub-title display-3 fw-extra-bold primary-text-shadow">Get In Touch</h3>						
-                </div>
-                {/* -- section-title -- */}
-            </div>
-            <div className="col-lg-5">
-                <div className="highlights-text wow fadeInLeft">
-                    <p className="custom-roboto custom-font-style-1 text-lg-end mb-2">
-                        Immerse in mesmerizing performances,vibrant soundscapes,and interactive art at our music extravaganza. Experience a festival atmosphere like no other, where unforgettable moments.
-                    </p>
-                </div>
-            </div>
-        </div>
-        {/* -- row -- */}
+      <div className="container">
+        {/* ... (keeping the existing title and description) ... */}
         <div className="contact-us-form">
-            <form action="#">						
-                <div className="row gx-5 gy-4 gy-lg-5">		
-                    <div className="col-lg-6">
-                        <input type="text" className="form-control" id="firstName" placeholder="First Name *" required/>							  
-                    </div>
+          <form onSubmit={handleSubmit}>
+            <div className="row gx-5 gy-4 gy-lg-5">
+              <div className="col-lg-6">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="first_name"
+                  value={formData.first_name}
+                  onChange={handleChange}
+                  placeholder="First Name *"
+                  required
+                />
+              </div>
 
-                    <div className="col-lg-6">												
-                        <input type="text" className="form-control" id="lastName" placeholder="Last Name *"/>									  
-                    </div>
-                                        
-                    <div className="col">												
-                        <input type="email" className="form-control" placeholder="Email" required/>																	
-                    </div>
-                        
-                    <div className="col-12">											
-                        <textarea className="form-control" placeholder="Your Comment" id="form-textarea" style={{height: "100px"}}></textarea>											
-                    </div>
+              <div className="col-lg-6">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="last_name"
+                  value={formData.last_name}
+                  onChange={handleChange}
+                  placeholder="Last Name *"
+                  required
+                />
+              </div>
 
-                    <div className="col-12">									
-                        <button type="submit" className="btn btn-gradient d-inline-flex" aria-label="buttons">Submit</button>
-                    </div>
-                </div>
-                {/* -- row -- */}
-            </form>
+              <div className="col-lg-6">
+                <input
+                  type="email"
+                  className="form-control"
+                  id="customer_email"
+                  value={formData.customer_email}
+                  onChange={handleChange}
+                  placeholder="Email *"
+                  required
+                />
+              </div>
+
+              <div className="col-lg-6">
+                <input
+                  type="tel"
+                  className="form-control"
+                  id="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="Phone Number"
+                />
+              </div>
+
+              <div className="col-12">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder="Subject"
+                />
+              </div>
+
+              <div className="col-12">
+                <textarea
+                  className="form-control"
+                  id="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Your Message"
+                  style={{height: "100px"}}
+                  required
+                ></textarea>
+              </div>
+
+              <div className="col-12">
+                <button type="submit" className="btn btn-gradient d-inline-flex" aria-label="submit">Submit</button>
+              </div>
+            </div>
+            {/* -- row -- */}
+          </form>
         </div>
         {/* -- contact-us-form --*/}
-    </div>
-    {/* -- container -- */}
-</section>
+      </div>
+      {/* -- container -- */}
+    </section>
   )
 }
 
-export default Contact
+export default Contact;

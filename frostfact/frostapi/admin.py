@@ -1,7 +1,7 @@
 # admin.py
 
 from django.contrib import admin
-from .models import ClientProfile, ContactFormSubmission, EventData
+from .models import *
 
 class ContactFormSubmissionInline(admin.StackedInline):
     model = ContactFormSubmission
@@ -33,3 +33,31 @@ class EventDataAdmin(admin.ModelAdmin):
     list_display = ('event_name', 'event_date', 'event_host', 'event_image', 'client_profile')
     search_fields = ['event_name', 'client_profile__client_business', 'event_host']
     readonly_fields = ('slug',)
+
+
+
+@admin.register(FAQData)
+class FAQDataAdmin(admin.ModelAdmin):
+    list_display = ('faq_title', 'faq_descrip')
+    search_fields = ('faq_title', 'faq_descrip')
+
+@admin.register(PolicyData)
+class PolicyDataAdmin(admin.ModelAdmin):
+    list_display = ('Policy_title', 'Policy_descrip')
+    search_fields = ('Policy_title', 'Policy_descrip')
+
+@admin.register(GalleryData)
+class GalleryDataAdmin(admin.ModelAdmin):
+    list_display = ('gallery_media_title', 'gallery_media_choices', 'gallery_media_description')
+    list_filter = ('gallery_media_choices',)
+    search_fields = ('gallery_media_title', 'gallery_media_description')
+
+    fields = (
+        'gallery_media_title',
+        'gallery_media_choices',
+        'gallery_media_description',
+        'gallery_media_image',
+        'gallery_media_video'
+    )
+
+

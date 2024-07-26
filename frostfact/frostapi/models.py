@@ -121,7 +121,7 @@ class GalleryData(models.Model):
     gallery_media_image = models.ImageField(upload_to='gallery', blank=True, null=True, verbose_name='Image Upload')
     gallery_media_video = models.URLField()
     gallery_media_choices = models.TextField(max_length=10, choices=MediaChoices, default=MediaChoices.IMAGE)
-
+    slug = models.SlugField(unique=True, blank=True, null=True, verbose_name="gallery Slug", editable=False)
     class Meta:
         verbose_name_plural = 'Gallery Data'
 

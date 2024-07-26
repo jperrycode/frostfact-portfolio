@@ -217,6 +217,12 @@ USE_I18N = True
 
 USE_TZ = True
 
+DATE_FORMAT = '%Y-%m-%d'
+
+TIME_FORMAT = "%H:%M:%S"
+
+USE_L10N = False
+
 
 STATIC_URL = '/static/'
 

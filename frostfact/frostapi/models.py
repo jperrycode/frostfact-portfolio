@@ -7,6 +7,7 @@ from django.utils.text import slugify
 import uuid
 from rest_framework.authtoken.models import Token
 from datetime import datetime
+from django.core.validators import URLValidator
 
 def generate_unique_slug(model_class, field_value):
     """
@@ -119,7 +120,7 @@ class GalleryData(models.Model):
     gallery_media_title = models.CharField(max_length=100, blank=False, null=True, verbose_name='Image/Video Title')
     gallery_media_description = models.TextField(blank=False, null=True, verbose_name='Image/Video Description')
     gallery_media_image = models.ImageField(upload_to='gallery', blank=True, null=True, verbose_name='Image Upload')
-    gallery_media_video = models.URLField()
+    gallery_media_video = models.URLField(validators=[URLValidator()], blank=True, null=True, verbose_name='Video Link')
     gallery_media_choices = models.TextField(max_length=10, choices=MediaChoices, default=MediaChoices.IMAGE)
     slug = models.SlugField(unique=True, blank=True, null=True, verbose_name="gallery Slug", editable=False)
     class Meta:
@@ -133,6 +134,9 @@ class GalleryData(models.Model):
 
     def save(self, *args, **kwargs):
         self.full_clean()
-        super().save(*args, **kwargs)
+        if not self.slug:
+            self.slug = generate_unique_slug(GalleryData, self.gallery_media_title)
+        super(GalleryData, self).save(*args, **kwargs)
+
 
 

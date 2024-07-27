@@ -72,12 +72,5 @@ class FaqApiView(BaseAuthenticatedView, generics.ListCreateAPIView):
     serializer_class = FaqDataSerializer
 
 class GalleryApiView(BaseAuthenticatedView, generics.ListCreateAPIView):
-    def get(self, request, slug=None, *args, **kwargs):
-        self.authenticate(request)
-        if slug:
-            instance = get_object_or_404(self.get_queryset(), slug=slug)
-            serializer = self.get_serializer(instance)
-        else:
-            instances = self.get_queryset()
-            serializer = self.get_serializer(instances, many=True)
-        return Response(serializer.data)
+    queryset = GalleryData.objects.all()
+    serializer_class = GalleryDataSerializer

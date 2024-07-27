@@ -5,13 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0aa5ffb-8902-42fe-b9d3-8fa8fd4decbf" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_25_2024_10_14_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_25_2024_10_14_AM__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frostfact/frostapi/migrations/0017_remove_faqdata_faq_answer_and_more.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frostfact/frostapi/migrations/0018_alter_eventdata_event_date_and_more.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frostfact/frostapi/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/frostfact/frostapi/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frostfact/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/frostfact/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frostfact/frostapi/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/frostfact/frostapi/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frostfact/frostapi/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/frostfact/frostapi/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frostfact/frostapi/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/frostfact/frostapi/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frostfact/frostapi/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/frostfact/frostapi/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frostfact/frostfact/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/frostfact/frostfact/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

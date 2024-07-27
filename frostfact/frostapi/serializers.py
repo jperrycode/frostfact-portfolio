@@ -28,3 +28,9 @@ class PolicyDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = PolicyData
         fields = '__all__'
+
+
+class GalleryDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GalleryData
+        fields = '__all__'

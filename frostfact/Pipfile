@@ -18,6 +18,7 @@ psycopg2 = "*"
 gunicorn = "*"
 django-cors-headers = "*"
 pybase64 = "*"
+django-grappelli = "*"
 
 [dev-packages]
 

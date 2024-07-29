@@ -101,4 +101,10 @@ export const galleryData = [
         type: "image",
         link: "#"
     },
+    {
+        id: 16,
+        src: gallery_1,
+        type: "video",
+        link: "https://www.youtube.com/watch?v=z5rRZdiu1UE"
+    },
 ]

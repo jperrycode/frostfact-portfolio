@@ -4,8 +4,7 @@ from rest_framework import generics, permissions
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
 from base64 import b64decode
-from .serializers import ContactFormSerializer, EventDataSerializer, ClientProfileSerializer
-from .models import ContactFormSubmission, EventData, ClientProfile
+from .serializers import *
 from django.contrib.auth.models import User
 
 class BaseAuthenticatedView(generics.GenericAPIView):
@@ -64,4 +63,14 @@ class ClientApiView(BaseAuthenticatedView, generics.ListCreateAPIView):
     serializer_class = ClientProfileSerializer
     ordering_fields = ('start_datetime',)
 
+class PolicyApiView(BaseAuthenticatedView, generics.ListCreateAPIView):
+    queryset = PolicyData.objects.all()
+    serializer_class = PolicyDataSerializer
 
+class FaqApiView(BaseAuthenticatedView, generics.ListCreateAPIView):
+    queryset = FAQData.objects.all()
+    serializer_class = FaqDataSerializer
+
+class GalleryApiView(BaseAuthenticatedView, generics.ListCreateAPIView):
+    queryset = GalleryData.objects.all()
+    serializer_class = GalleryDataSerializer

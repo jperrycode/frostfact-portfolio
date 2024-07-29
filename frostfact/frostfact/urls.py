@@ -10,6 +10,7 @@ from rest_framework_simplejwt.views import (
 )
 
 urlpatterns = [
+    path('grappelli/', include('grappelli.urls')), # grappelli URLS
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(api_urls)),
@@ -24,3 +25,7 @@ if settings.DEBUG:
 
 if settings.DEBUG:  # new
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+admin.site.site_header = 'Castle in the Sku: Admin'
+admin.site.index_title = 'Data Sets'

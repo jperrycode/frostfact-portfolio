@@ -6,6 +6,10 @@ from django.dispatch import receiver
 from django.utils.text import slugify
 import uuid
 from rest_framework.authtoken.models import Token
+from datetime import datetime
+from django.core.validators import URLValidator
+from django.core.exceptions import ValidationError
+
 
 def generate_unique_slug(model_class, field_value):
     """
@@ -48,7 +52,7 @@ class ContactFormSubmission(models.Model):
     first_name = models.CharField(max_length=255, blank=True, null=True, verbose_name="First Name")
     last_name = models.CharField(max_length=255, blank=True, null=True, verbose_name="Last Name")
     message = models.TextField(verbose_name="Message")
-    time_stamp = models.DateTimeField(auto_now_add=True, verbose_name="Timestamp", blank=True, null=True)
+    time_stamp = models.DateTimeField(auto_now_add=True, verbose_name="Timestamp", blank=True, null=True, editable=False)
     condition = models.CharField(max_length=255, blank=True, null=True, verbose_name="Condition")
     slug = models.SlugField(unique=True, blank=True, null=True, verbose_name="Contact Slug", editable=False)
 
@@ -75,12 +79,16 @@ def execute_after_save(sender, instance, created, **kwargs):
         instance.run_after_save()
 
 class EventData(models.Model):
-    event_name = models.CharField(max_length=255, verbose_name="Event Name")
-    event_date = models.DateTimeField(verbose_name="Event Date")
+    event_name = models.CharField(max_length=255, blank=True, null=True, verbose_name="Event Name")
+    event_venue = models.CharField(max_length=30, blank=True, null=True, verbose_name="Event Venue")
+    event_date = models.DateTimeField(default=datetime.now(), verbose_name="Event Date")
+    event_time = models.TimeField(default=datetime.now(), verbose_name="Event Time")
     event_host = models.CharField(max_length=255, blank=True, null=True, verbose_name="Event Host")
     client_profile = models.ForeignKey(ClientProfile, on_delete=models.CASCADE, related_name='events', verbose_name="Client Profile")
     event_image = models.ImageField(upload_to='frost', blank=True, verbose_name='Image Upload')
+    event_description = models.TextField(blank=True, null=True, verbose_name="Event Description")
     slug = models.SlugField(unique=True, blank=True, null=True, verbose_name="Event Slug", editable=False)
+    time_stamp = models.DateTimeField(auto_now_add=True, verbose_name="Timestamp", blank=True, null=True, editable=False)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -89,4 +97,49 @@ class EventData(models.Model):
 
     def __str__(self):
         return self.event_name
+
+
+class FAQData(models.Model):
+    faq_title = models.CharField(max_length=100, blank=False, null=True, verbose_name='FAQ Title')
+    faq_descrip = models.TextField(blank=False, null=True, verbose_name='FAQ Description')
+
+    class Meta:
+        verbose_name_plural = 'FAQ Data'
+
+
+class PolicyData(models.Model):
+    Policy_title = models.CharField(max_length=100, blank=False, null=True, verbose_name='Policy Title')
+    Policy_descrip = models.TextField(blank=False, null=True, verbose_name='Policy Description')
+
+    class Meta:
+        verbose_name_plural = 'Policy Data'
+
+class GalleryData(models.Model):
+
+    class MediaChoices(models.TextChoices):
+        IMAGE = 'Image', 'Image'
+        VIDEO = 'Video', 'Video'
+
+    gallery_media_title = models.CharField(max_length=100, blank=False, null=True, verbose_name='Image/Video Title')
+    gallery_media_description = models.TextField(blank=False, null=True, verbose_name='Image/Video Description')
+    gallery_media_image = models.ImageField(upload_to='gallery', blank=True, null=True, verbose_name='Image Upload')
+    gallery_media_video = models.URLField(validators=[URLValidator()], blank=True, null=True, verbose_name='Video Link')
+    gallery_media_choices = models.TextField(max_length=10, choices=MediaChoices, default=MediaChoices.IMAGE)
+    slug = models.SlugField(unique=True, blank=True, null=True, verbose_name="gallery Slug", editable=False)
+    class Meta:
+        verbose_name_plural = 'Gallery Data'
+
+    def clean(self):
+        if self.gallery_media_choices == self.MediaChoices.IMAGE and not self.gallery_media_image:
+            raise ValidationError("Image is required when 'Image' is selected.")
+        if self.gallery_media_choices == self.MediaChoices.VIDEO and not self.gallery_media_video:
+            raise ValidationError("Video URL is required when 'Video' is selected.")
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        if not self.slug:
+            self.slug = generate_unique_slug(GalleryData, self.gallery_media_title)
+        super(GalleryData, self).save(*args, **kwargs)
+
+
 

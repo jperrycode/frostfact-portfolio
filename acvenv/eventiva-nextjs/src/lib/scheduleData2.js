@@ -79,3 +79,11 @@ export const scheduleData2 = [
         desc: "VIP ticket holders can unwind and indulge in the soothing melodies of Luna Serenade at the exclusive Lunar Lounge, offering a more intimate and unique experience."
     },
 ]
+
+
+class FAQ_Data(models.Model):
+    faq_question = models.CharField(max_length=100, blank=False, null=True, verbose_name='FAQ Question')
+    faq_answer = models.TextField(blank=False, null=True, verbose_name='FAQ Answer')
+
+    class Meta:
+        verbose_name_plural = 'FAQ Data'

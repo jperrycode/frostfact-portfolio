@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import *
 
 class ContactFormSerializer(serializers.ModelSerializer):
-    time_stamp = serializers.DateTimeField(format='%Y-%m-%d %H:%M:%S')
+
     class Meta:
         model = ContactFormSubmission
         fields = '__all__'
@@ -18,6 +18,19 @@ class ClientProfileSerializer(serializers.ModelSerializer):
         model = ClientProfile
         fields = '__all__'
 
+class FaqDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FAQData
+        fields = '__all__'
 
 
+class PolicyDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PolicyData
+        fields = '__all__'
 
+
+class GalleryDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GalleryData
+        fields = '__all__'

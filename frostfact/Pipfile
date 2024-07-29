@@ -19,6 +19,7 @@ gunicorn = "*"
 django-cors-headers = "*"
 pybase64 = "*"
 django-grappelli = "*"
+django-admin-interface = "*"
 
 [dev-packages]
 

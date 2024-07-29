@@ -8,6 +8,8 @@ import uuid
 from rest_framework.authtoken.models import Token
 from datetime import datetime
 from django.core.validators import URLValidator
+from django.core.exceptions import ValidationError
+
 
 def generate_unique_slug(model_class, field_value):
     """
@@ -50,7 +52,7 @@ class ContactFormSubmission(models.Model):
     first_name = models.CharField(max_length=255, blank=True, null=True, verbose_name="First Name")
     last_name = models.CharField(max_length=255, blank=True, null=True, verbose_name="Last Name")
     message = models.TextField(verbose_name="Message")
-    time_stamp = models.DateTimeField(auto_now_add=True, verbose_name="Timestamp", blank=True, null=True)
+    time_stamp = models.DateTimeField(auto_now_add=True, verbose_name="Timestamp", blank=True, null=True, editable=False)
     condition = models.CharField(max_length=255, blank=True, null=True, verbose_name="Condition")
     slug = models.SlugField(unique=True, blank=True, null=True, verbose_name="Contact Slug", editable=False)
 
@@ -86,6 +88,7 @@ class EventData(models.Model):
     event_image = models.ImageField(upload_to='frost', blank=True, verbose_name='Image Upload')
     event_description = models.TextField(blank=True, null=True, verbose_name="Event Description")
     slug = models.SlugField(unique=True, blank=True, null=True, verbose_name="Event Slug", editable=False)
+    time_stamp = models.DateTimeField(auto_now_add=True, verbose_name="Timestamp", blank=True, null=True, editable=False)
 
     def save(self, *args, **kwargs):
         if not self.slug:

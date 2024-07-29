@@ -119,7 +119,8 @@ else:  # Development
 # Application definition
 
 INSTALLED_APPS = [
-    'grappelli',
+    "admin_interface",
+    "colorfield",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -220,7 +221,7 @@ USE_TZ = True
 
 DATE_FORMAT = '%Y-%m-%d'
 
-TIME_FORMAT = "%H:%M:%S"
+TIME_FORMAT = "%H:%M"
 
 USE_L10N = False
 
@@ -243,4 +244,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_COOKIE_NAME = 'XSRF-TOKEN'
 CSRF_HEADER_NAME = 'HTTP_X_XSRF_TOKEN'
 
-GRAPPELLI_ADMIN_TITLE = "Castle in the Sky Admin"
+X_FRAME_OPTIONS = "SAMEORIGIN"
+SILENCED_SYSTEM_CHECKS = ["security.W019"]

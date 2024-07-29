@@ -25,3 +25,7 @@ if settings.DEBUG:
 
 if settings.DEBUG:  # new
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+admin.site.site_header = 'Castle in the Sku: Admin'
+admin.site.index_title = 'Data Sets'

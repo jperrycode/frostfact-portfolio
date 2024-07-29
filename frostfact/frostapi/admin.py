@@ -3,6 +3,7 @@
 from django.contrib import admin
 from .models import *
 
+
 class ContactFormSubmissionInline(admin.StackedInline):
     model = ContactFormSubmission
     extra = 0  # Do not show extra empty forms
@@ -24,9 +25,11 @@ class ClientProfileAdmin(admin.ModelAdmin):
 
 @admin.register(ContactFormSubmission)
 class ContactFormSubmissionAdmin(admin.ModelAdmin):
-    list_display = ('customer_email', 'subject', 'first_name', 'last_name', 'message', 'condition')
-    readonly_fields = ["time_stamp", 'slug']
-    search_fields = ["time_stamp", "customer_email"]
+    list_display = ('customer_email', 'subject', 'phone', 'first_name', 'last_name', 'time_stamp')
+    search_fields = ('customer_email', 'subject', 'phone', 'first_name', 'last_name')
+    autocomplete_fields = ('client_profile',)  # Use autocomplete_fields for ClientProfile lookup
+    readonly_fields = ('slug', 'time_stamp')
+    ordering = ('-time_stamp',)
 
 @admin.register(EventData)
 class EventDataAdmin(admin.ModelAdmin):
@@ -41,16 +44,19 @@ class FAQDataAdmin(admin.ModelAdmin):
     list_display = ('faq_title', 'faq_descrip')
     search_fields = ('faq_title', 'faq_descrip')
 
+
 @admin.register(PolicyData)
 class PolicyDataAdmin(admin.ModelAdmin):
     list_display = ('Policy_title', 'Policy_descrip')
     search_fields = ('Policy_title', 'Policy_descrip')
+
 
 @admin.register(GalleryData)
 class GalleryDataAdmin(admin.ModelAdmin):
     list_display = ('gallery_media_title', 'gallery_media_choices', 'gallery_media_description')
     list_filter = ('gallery_media_choices',)
     search_fields = ('gallery_media_title', 'gallery_media_description')
+
 
     fields = (
         'gallery_media_title',
@@ -59,5 +65,7 @@ class GalleryDataAdmin(admin.ModelAdmin):
         'gallery_media_image',
         'gallery_media_video'
     )
+
+
 
 

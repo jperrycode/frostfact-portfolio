@@ -5,6 +5,7 @@ import os
 import sys
 from datetime import timedelta
 import base64
+from django.contrib.auth.apps import AuthConfig
 
 
 
@@ -133,7 +134,7 @@ INSTALLED_APPS = [
 
 
 ]
-
+AuthConfig.verbose_name = "User Authorization"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',

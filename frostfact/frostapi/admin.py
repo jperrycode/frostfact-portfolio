@@ -15,6 +15,7 @@ class EventDataInline(admin.StackedInline):
     extra = 0  # Do not show extra empty forms
     fields = ('event_name', 'event_date', 'event_host', 'event_image')  # Fields to display
     readonly_fields = ('event_date',)
+    list_filter = ['client_profile']
 
 @admin.register(ClientProfile)
 class ClientProfileAdmin(admin.ModelAdmin):
@@ -23,13 +24,18 @@ class ClientProfileAdmin(admin.ModelAdmin):
     readonly_fields = ('slug',)
     inlines = [ContactFormSubmissionInline, EventDataInline]
 
+
 @admin.register(ContactFormSubmission)
 class ContactFormSubmissionAdmin(admin.ModelAdmin):
-    list_display = ('customer_email', 'subject', 'phone', 'first_name', 'last_name', 'time_stamp')
+    list_display = ('customer_email', 'subject', 'combined_name', 'time_stamp', 'client_profile')
     search_fields = ('customer_email', 'subject', 'phone', 'first_name', 'last_name')
     autocomplete_fields = ('client_profile',)  # Use autocomplete_fields for ClientProfile lookup
     readonly_fields = ('slug', 'time_stamp')
     ordering = ('-time_stamp',)
+    list_filter = ('client_profile',)
+
+    def combined_name(self, obj):
+        return f"{obj.first_name} {obj.last_name}"
 
 @admin.register(EventData)
 class EventDataAdmin(admin.ModelAdmin):

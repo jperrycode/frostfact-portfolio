@@ -71,6 +71,9 @@ if ENVIRONMENT == 'production':
             conn_health_checks=True,
         )
     }
+    DATABASES['default']['OPTIONS'] = {
+        'sslmode': 'require',  # Add this if your server requires SSL/TLS
+    }
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
@@ -83,13 +86,16 @@ if ENVIRONMENT == 'production':
 
 elif ENVIRONMENT == 'staging':
     DEBUG = True  # Set to False if you want staging to behave like production
-    ALLOWED_HOSTS = ['dent-stage-746edca57174.herokuapp.com']
+    ALLOWED_HOSTS = ['dent-stage-746edca57174.herokuapp.com', '*']
     DATABASES = {
         'default': dj_database_url.config(
             default=str(os.getenv('DATABASE_URL')),
             conn_max_age=600,
             conn_health_checks=True,
         )
+    }
+    DATABASES['default']['OPTIONS'] = {
+        'sslmode': 'require',  # Add this if your server requires SSL/TLS
     }
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SESSION_COOKIE_SECURE = False
@@ -100,6 +106,7 @@ elif ENVIRONMENT == 'staging':
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_SSL_REDIRECT = False
+    CORS_ORIGIN_ALLOW_ALL = True
 
 else:  # Development
     CORS_ORIGIN_ALLOW_ALL = True

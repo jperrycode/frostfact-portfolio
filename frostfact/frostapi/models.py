@@ -55,6 +55,7 @@ class ContactFormSubmission(models.Model):
     time_stamp = models.DateTimeField(auto_now_add=True, verbose_name="Timestamp", blank=True, null=True, editable=False)
     condition = models.CharField(max_length=255, blank=True, null=True, verbose_name="Condition")
     slug = models.SlugField(unique=True, blank=True, null=True, verbose_name="Contact Slug", editable=False)
+    message_read = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -98,6 +99,8 @@ class EventData(models.Model):
     def __str__(self):
         return self.event_name
 
+    class Meta:
+        ordering = ['event_date']
 
 class FAQData(models.Model):
     faq_title = models.CharField(max_length=100, blank=False, null=True, verbose_name='FAQ Title')

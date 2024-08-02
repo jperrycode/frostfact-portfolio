@@ -20,6 +20,7 @@ django-cors-headers = "*"
 pybase64 = "*"
 django-grappelli = "*"
 django-admin-interface = "*"
+dj-database-url = "*"
 
 [dev-packages]
 

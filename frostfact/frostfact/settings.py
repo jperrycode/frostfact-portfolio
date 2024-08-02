@@ -6,6 +6,7 @@ import sys
 from datetime import timedelta
 import base64
 from django.contrib.auth.apps import AuthConfig
+import dj_database_url
 
 
 
@@ -112,11 +113,23 @@ else:  # Development
     CORS_ORIGIN_ALLOW_ALL = True
     DEBUG = True
     ALLOWED_HOSTS = ['*']
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.sqlite3',
+    #         'NAME': BASE_DIR / 'db.sqlite3',
+    #     }
+    # }
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
+        'default': dj_database_url.config(
+            default=str(os.getenv('DATABASE_URL')),
+            conn_max_age=600,
+            conn_health_checks=True,
+            ssl_require=True,
+        )
+    }
+
+    DATABASES['default']['OPTIONS'] = {
+        'sslmode': 'require',  # Ensure sslmode is set to 'require'
     }
     CORS_ALLOWED_ORIGINS = [
         "http://localhost:8080",

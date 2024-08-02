@@ -103,16 +103,16 @@ class EventData(models.Model):
         ordering = ['event_date']
 
 class FAQData(models.Model):
-    faq_title = models.CharField(max_length=100, blank=False, null=True, verbose_name='FAQ Title')
-    faq_descrip = models.TextField(blank=False, null=True, verbose_name='FAQ Description')
+    faq_title = models.CharField(max_length=100, blank=True, null=True, verbose_name='FAQ Title')
+    faq_descrip = models.TextField(blank=True, null=True, verbose_name='FAQ Description')
 
     class Meta:
         verbose_name_plural = 'FAQ Data'
 
 
 class PolicyData(models.Model):
-    Policy_title = models.CharField(max_length=100, blank=False, null=True, verbose_name='Policy Title')
-    Policy_descrip = models.TextField(blank=False, null=True, verbose_name='Policy Description')
+    Policy_title = models.CharField(max_length=100, blank=True, null=True, verbose_name='Policy Title')
+    Policy_descrip = models.TextField(blank=True, null=True, verbose_name='Policy Description')
 
     class Meta:
         verbose_name_plural = 'Policy Data'
@@ -123,8 +123,8 @@ class GalleryData(models.Model):
         IMAGE = 'Image', 'Image'
         VIDEO = 'Video', 'Video'
 
-    gallery_media_title = models.CharField(max_length=100, blank=False, null=True, verbose_name='Image/Video Title')
-    gallery_media_description = models.TextField(blank=False, null=True, verbose_name='Image/Video Description')
+    gallery_media_title = models.CharField(max_length=100, blank=True, null=True, verbose_name='Image/Video Title')
+    gallery_media_description = models.TextField(blank=True, null=True, verbose_name='Image/Video Description')
     gallery_media_image = models.ImageField(upload_to='gallery', blank=True, null=True, verbose_name='Image Upload')
     gallery_media_video = models.URLField(validators=[URLValidator()], blank=True, null=True, verbose_name='Video Link')
     gallery_media_choices = models.TextField(max_length=10, choices=MediaChoices, default=MediaChoices.IMAGE)

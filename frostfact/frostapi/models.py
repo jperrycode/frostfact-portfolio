@@ -47,7 +47,7 @@ class ClientProfile(models.Model):
 class ContactFormSubmission(models.Model):
     customer_email = models.EmailField(verbose_name="Customer's Email")
     subject = models.CharField(max_length=255, blank=True, null=True, verbose_name="Subject")
-    client_profile = models.ForeignKey(ClientProfile, on_delete=models.CASCADE, related_name='contact_forms', verbose_name="Client Profile", null=True)
+    client_profile = models.ForeignKey(ClientProfile, on_delete=models.CASCADE, related_name='contact_forms', verbose_name="Client Profile", null=True, blank=True)
     phone = models.CharField(max_length=12, blank=True, null=True, verbose_name="Phone Number")
     first_name = models.CharField(max_length=255, blank=True, null=True, verbose_name="First Name")
     last_name = models.CharField(max_length=255, blank=True, null=True, verbose_name="Last Name")
@@ -60,25 +60,36 @@ class ContactFormSubmission(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = generate_unique_slug(ContactFormSubmission, f'{self.last_name}-{self.first_name}')
+
+        # Save the instance first to create a slug
         super(ContactFormSubmission, self).save(*args, **kwargs)
+
+        # Ensure client_profile is set
+        self.run_after_save()
 
     def __str__(self):
         return f"Submission by {self.customer_email} on {self.time_stamp}"
 
     def run_after_save(self):
-        if not ClientProfile.objects.filter(client_email=self.customer_email).exists():
-            ClientProfile.objects.create(
-                client_first_name=self.first_name,
-                client_last_name=self.last_name,
+        if not self.client_profile:
+            client_profile, created = ClientProfile.objects.get_or_create(
                 client_email=self.customer_email,
-                client_phone=self.phone,
+                defaults={
+                    'client_first_name': self.first_name,
+                    'client_last_name': self.last_name,
+                    'client_phone': self.phone
+                }
             )
+            if created:
+                self.client_profile = client_profile
+                # Save again if a new ClientProfile was created
+                self.save()
+
 
 @receiver(post_save, sender=ContactFormSubmission)
 def execute_after_save(sender, instance, created, **kwargs):
     if created:
         instance.run_after_save()
-
 class EventData(models.Model):
     event_name = models.CharField(max_length=255, blank=True, null=True, verbose_name="Event Name")
     event_venue = models.CharField(max_length=30, blank=True, null=True, verbose_name="Event Venue")

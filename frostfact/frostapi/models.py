@@ -38,22 +38,22 @@ class ClientProfile(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = generate_unique_slug(ClientProfile, f'{self.client_first_name}-{self.client_last_name}')
+            self.slug = generate_unique_slug(ClientProfile, f'{self.client_last_name}-{self.client_business}')
         super(ClientProfile, self).save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.client_first_name} {self.client_last_name} - {self.client_business}"
 
 class ContactFormSubmission(models.Model):
-    customer_email = models.EmailField(verbose_name="Customer's Email")
+    customer_email = models.EmailField(verbose_name="Customer's Email", default="Enter Email Address Here", blank=True)
     subject = models.CharField(max_length=255, blank=True, null=True, verbose_name="Subject")
     client_profile = models.ForeignKey(ClientProfile, on_delete=models.CASCADE, related_name='contact_forms', verbose_name="Client Profile", null=True, blank=True)
     phone = models.CharField(max_length=12, blank=True, null=True, verbose_name="Phone Number")
     first_name = models.CharField(max_length=255, blank=True, null=True, verbose_name="First Name")
     last_name = models.CharField(max_length=255, blank=True, null=True, verbose_name="Last Name")
-    message = models.TextField(verbose_name="Message")
+    event_date_request = models.DateTimeField(default=datetime.now(), verbose_name="Event Date")
+    message = models.TextField(verbose_name="Message", default='Tell us about your event')
     time_stamp = models.DateTimeField(auto_now_add=True, verbose_name="Timestamp", blank=True, null=True, editable=False)
-    condition = models.CharField(max_length=255, blank=True, null=True, verbose_name="Condition")
     slug = models.SlugField(unique=True, blank=True, null=True, verbose_name="Contact Slug", editable=False)
     message_read = models.BooleanField(default=False)
 
@@ -61,11 +61,11 @@ class ContactFormSubmission(models.Model):
         if not self.slug:
             self.slug = generate_unique_slug(ContactFormSubmission, f'{self.last_name}-{self.first_name}')
 
-        # Save the instance first to create a slug
+        is_new = self._state.adding
         super(ContactFormSubmission, self).save(*args, **kwargs)
 
-        # Ensure client_profile is set
-        self.run_after_save()
+        if is_new and not self.client_profile:
+            self.run_after_save()
 
     def __str__(self):
         return f"Submission by {self.customer_email} on {self.time_stamp}"

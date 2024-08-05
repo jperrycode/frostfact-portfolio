@@ -45,9 +45,9 @@ const LineupCustom = () => {
                                 className={"mb-4 mb-lg-30"}
                             />
 
-                            <div className="py-2 pb-lg-0 pt-lg-3">
+                            {/* <div className="py-2 pb-lg-0 pt-lg-3">
                                 <Link href="#" className="download-link d-flex align-items-center gap-30" aria-label="buttons">See More <TopUpArrow height={"32"} width={"32"} className={"ticket-arrow"} /> </Link>
-                            </div>
+                            </div> */}
                         </div>
                         {/* -- lineup-right-content -- */}
                     </div>

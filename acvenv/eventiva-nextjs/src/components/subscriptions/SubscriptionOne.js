@@ -130,7 +130,7 @@ const SubscriptionOne = ({ styleNum }) => {
                                             :
                                             <SectionTitle
                                                 title={"148 Frost Street"}
-                                                subTitle={"Brookyn, NY"}
+                                                subTitle={"Brooklyn, NY"}
                                                 titleClass={""}
                                                 subTitleClass={subTitleClass}
                                             />

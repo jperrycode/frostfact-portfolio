@@ -81,9 +81,9 @@ export const scheduleData2 = [
 ]
 
 
-class FAQ_Data(models.Model):
-    faq_question = models.CharField(max_length=100, blank=False, null=True, verbose_name='FAQ Question')
-    faq_answer = models.TextField(blank=False, null=True, verbose_name='FAQ Answer')
+// class FAQ_Data(models.Model):
+//     faq_question = models.CharField(max_length=100, blank=False, null=True, verbose_name='FAQ Question')
+//     faq_answer = models.TextField(blank=False, null=True, verbose_name='FAQ Answer')
 
-    class Meta:
-        verbose_name_plural = 'FAQ Data'
+//     class Meta:
+//         verbose_name_plural = 'FAQ Data'

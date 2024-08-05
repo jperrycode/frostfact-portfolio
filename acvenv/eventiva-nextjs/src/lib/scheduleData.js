@@ -5,7 +5,7 @@ export const scheduleData = [
         list: [
             {
                 id: 1,
-                date: "9/1",
+                date: "9/1 10:00pm",
                 vanu: "8pm, Really Cool Event",
                 desc: ""
             },
@@ -41,7 +41,7 @@ export const scheduleData = [
             },
             {
                 id: 7,
-                date: "9/13",
+                date: "9/13 12:00am",
                 vanu: "9pm, Starlit Serenade Sessions",
                 desc: "Extend your night under the stars with intimate acoustic sessions. Unwind with soul-stirring melodies and acoustic performances by guest artists."
             },

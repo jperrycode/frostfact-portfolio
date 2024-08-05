@@ -8,6 +8,9 @@ import Accordion from '@/components/common/Accordion'
 
 import ellipse_1 from "@/assets/images/home-1/ellipse-2.png"
 import { faqData } from '@/lib/faqData'
+import { useState } from 'react'
+import { useEffect } from 'react'
+import { updateFaqData } from '@/lib/axiosApi'
 
 
 const Faq = ({ styleNum }) => {
@@ -33,8 +36,35 @@ const Faq = ({ styleNum }) => {
     }
     // ----- Change classname define in home page
 
+    const [data, setData] = useState(faqData);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchDataAndUpdate = async () => {
+            try {
+                const updatedData = await updateFaqData(faqData);
+                setData(updatedData);
+                setLoading(false);
+            } catch (err) {
+                setError(err);
+                setLoading(false);
+            }
+        };
+
+        fetchDataAndUpdate();
+    }, []);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error loading data!</p>;
+
     return (
+        
         <section className={`faq-section ${prentClass}`}>
+            {/* <div>
+                <h1>Data Loaded</h1>
+                <pre>{JSON.stringify(data, null, 2)}</pre>
+            </div> */}
             <div className="container">
                 <div className="row gx-0 gy-lg-0 gy-30">
                     <div className="col-lg-5">
@@ -70,7 +100,7 @@ const Faq = ({ styleNum }) => {
                         <div className="faq-wrapper position-relative">
                             <div className="accordion" id="faq-1-accordion">
                                 {
-                                    faqData.map(({ id, ans, question }) => <Accordion key={id} id={id} ans={ans} question={question} parents_id={`faq-1-accordion`} />)
+                                    data.map(({ id, ans, question }) => <Accordion key={`accordion-${id}`} id={`accordion-${id}`} ans={ans} question={question} parents_id={`faq-1-accordion`} />)
                                 }
 
                             </div>

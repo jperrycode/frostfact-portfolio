@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0aa5ffb-8902-42fe-b9d3-8fa8fd4decbf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frostfact/frostapi/migrations/0026_alter_contactformsubmission_event_date_request_and_more.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pipfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Pipfile.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +36,7 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
+    <option name="compactDirectories" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
@@ -43,7 +44,7 @@
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev-jp-prod-db-live&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;AREK-USE&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/django_projects/frostfact/Lib/site-packages/grappelli/static/grappelli/stylesheets&quot;
   }
 }</component>

@@ -1,2 +1,2 @@
 release: python frostfact/manage.py migrate --noinput
-web: gunicorn frostfact.frostfact.wsgi
+web: gunicorn --pythonpath frostfact frostfact.wsgi --log-file -

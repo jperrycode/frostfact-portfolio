@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0aa5ffb-8902-42fe-b9d3-8fa8fd4decbf" name="Changes" comment="" />
+    <list default="true" id="f0aa5ffb-8902-42fe-b9d3-8fa8fd4decbf" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Pipfile" beforeDir="false" afterPath="$PROJECT_DIR$/Pipfile" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,16 +39,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;AREK-USE&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/django_projects/frostfact/Lib/site-packages/grappelli/static/grappelli/stylesheets&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "AREK-USE",
+    "last_opened_file_path": "C:/django_projects/frostfact"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\django_projects\frostfact" />
       <recent name="C:\django_projects\frostfact\Lib\site-packages\grappelli\static\grappelli\stylesheets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">

@@ -39,8 +39,8 @@ class ContactFormSubmissionAdmin(admin.ModelAdmin):
 
 @admin.register(EventData)
 class EventDataAdmin(admin.ModelAdmin):
-    list_display = ('event_name', 'event_date', 'event_host', 'event_image', 'client_profile')
-    search_fields = ['event_name', 'client_profile__client_business', 'event_host']
+    list_display = ('event_name', 'event_genre', 'event_date', 'event_host', 'event_image', 'client_profile')
+    search_fields = ['event_name', 'client_profile__client_business', 'event_host', 'event_genre']
     readonly_fields = ('slug',)
 
 

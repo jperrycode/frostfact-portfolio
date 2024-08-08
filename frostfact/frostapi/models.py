@@ -12,7 +12,9 @@ from django.core.exceptions import ValidationError
 from PIL import Image
 from io import BytesIO
 from django.core.files.base import ContentFile
+from django.utils import timezone
 import logging
+
 
 logger = logging.getLogger(__name__)
 
@@ -95,10 +97,26 @@ class ContactFormSubmission(models.Model):
 def execute_after_save(sender, instance, created, **kwargs):
     if created:
         instance.run_after_save()
+
+
+
+
 class EventData(models.Model):
+    class EventTypeChoices(models.TextChoices):
+        MUSIC = 'Music', 'Music'
+        THEATRE = 'Theatre', 'Theatre'
+        WRESTLING = 'Wrestling', 'Wrestling'
+        MARKET = 'Market', 'Market'
+        PRIVATE_PARTY = 'Private Party', 'Private Party'
+
+
+
+
     event_name = models.CharField(max_length=255, blank=True, null=True, verbose_name="Event Name")
     event_venue = models.CharField(max_length=30, blank=True, null=True, verbose_name="Event Venue")
-    event_date = models.DateTimeField(default=datetime.now(), verbose_name="Event Date")
+    event_date = models.DateField(default=timezone.now, verbose_name="Event Date")
+    event_type = models.CharField(max_length=20, choices=EventTypeChoices, blank=True, null=True, verbose_name="Event Type")
+    event_genre = models.CharField(max_length=30, blank=True, null=True, verbose_name='Event Genre')
     event_time = models.TimeField(default=datetime.now(), verbose_name="Event Time")
     event_host = models.CharField(max_length=255, blank=True, null=True, verbose_name="Event Host")
     client_profile = models.ForeignKey(ClientProfile, on_delete=models.CASCADE, related_name='events', verbose_name="Client Profile")
@@ -106,6 +124,11 @@ class EventData(models.Model):
     event_description = models.TextField(blank=True, null=True, verbose_name="Event Description")
     slug = models.SlugField(unique=True, blank=True, null=True, verbose_name="Event Slug", editable=False)
     time_stamp = models.DateTimeField(auto_now_add=True, verbose_name="Timestamp", blank=True, null=True, editable=False)
+    artist_name = models.CharField(max_length=255, blank=True)
+    artist_instagram = models.URLField(validators=[URLValidator()], blank=True, null=True, verbose_name='Instagram')
+    artist_spotify = models.URLField(validators=[URLValidator()], blank=True, null=True, verbose_name='spotify')
+    artist_youtube = models.URLField(validators=[URLValidator()], blank=True, null=True, verbose_name='youtube')
+    artist_facebook = models.URLField(validators=[URLValidator()], blank=True, null=True, verbose_name='Facebook')
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -203,3 +226,13 @@ class GalleryData(models.Model):
 
             # Call the parent class's save method to save other changes
         super(GalleryData, self).save(*args, **kwargs)
+
+
+
+class TextSliderTop(models.Model):
+    top_slider_title = models.CharField(max_length=20, blank=True, null=False, primary_key=True)
+    top_slider_text = models.CharField(max_length=100, blank=True, null=True, verbose_name='Slider Top Text')
+
+class TextSliderBottom(models.Model):
+    bottom_slider_title = models.CharField(max_length=20, blank=True, null=False, primary_key=True)
+    bottom_slider_text = models.CharField(max_length=100, blank=True, null=True, verbose_name='Slider Bottom Text')

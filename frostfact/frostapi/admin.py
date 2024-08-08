@@ -59,7 +59,7 @@ class PolicyDataAdmin(admin.ModelAdmin):
 
 @admin.register(GalleryData)
 class GalleryDataAdmin(admin.ModelAdmin):
-    list_display = ('gallery_media_title', 'gallery_media_choices', 'gallery_media_description')
+    list_display = ('gallery_media_title', 'gallery_media_choices', 'gallery_media_description', 'gallery_media_image')
     list_filter = ('gallery_media_choices',)
     search_fields = ('gallery_media_title', 'gallery_media_description')
 

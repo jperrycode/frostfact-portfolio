@@ -9,7 +9,12 @@ from rest_framework.authtoken.models import Token
 from datetime import datetime
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
+from PIL import Image
+from io import BytesIO
+from django.core.files.base import ContentFile
+import logging
 
+logger = logging.getLogger(__name__)
 
 def generate_unique_slug(model_class, field_value):
     """
@@ -153,7 +158,48 @@ class GalleryData(models.Model):
         self.full_clean()
         if not self.slug:
             self.slug = generate_unique_slug(GalleryData, self.gallery_media_title)
+
+        try:
+            if self.gallery_media_image:
+                # Open the image using Pillow
+                img = Image.open(self.gallery_media_image)
+                logger.debug(f"Opened image: {self.gallery_media_image.name}, mode: {img.mode}, format: {img.format}")
+
+                # Define the desired height and calculate the corresponding width to maintain aspect ratio
+                desired_height = 500  # Target height
+                aspect_ratio = img.width / img.height
+                new_width = int(desired_height * aspect_ratio)
+
+                # Resize the image
+                img = img.resize((new_width, desired_height), Image.Resampling.LANCZOS)
+                logger.debug(f"Resized image to: {new_width}x{desired_height}")
+
+                # Ensure the image is saved as PNG regardless of the original format
+                img_io = BytesIO()
+
+                # If the image is not a PNG, convert it to PNG
+                if img.format != "PNG":
+                    if img.mode != "RGBA":
+                        img = img.convert("RGBA")
+                        logger.debug(f"Converted image to RGBA mode")
+                    img.save(img_io, format='PNG', optimize=True)
+                    logger.debug(f"Image converted to PNG and optimized")
+                    img_name = f"{self.gallery_media_image.name.split('.')[0]}.png"
+                else:
+                    # Save the PNG image directly after resizing
+                    img.save(img_io, format='PNG', optimize=True)
+                    logger.debug(f"PNG image resized and optimized")
+                    img_name = self.gallery_media_image.name
+
+                # Create a new Django file-like object to save to the model
+                img_content = ContentFile(img_io.getvalue(), img_name)
+
+                # Save the image back to the image field
+                self.gallery_media_image.save(img_name, img_content, save=False)
+
+        except Exception as e:
+            logger.error(f"Error processing image {self.gallery_media_image.name}: {e}")
+            raise
+
+            # Call the parent class's save method to save other changes
         super(GalleryData, self).save(*args, **kwargs)
-
-
-

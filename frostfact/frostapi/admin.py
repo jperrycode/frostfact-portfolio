@@ -39,7 +39,7 @@ class ContactFormSubmissionAdmin(admin.ModelAdmin):
 
 @admin.register(EventData)
 class EventDataAdmin(admin.ModelAdmin):
-    list_display = ('event_name', 'event_genre', 'event_date', 'event_host', 'event_image', 'client_profile')
+    list_display = ('event_name', 'event_genre', 'event_date', 'event_type', 'event_host', 'event_image', 'client_profile', 'artist_name', 'artist_instagram', 'artist_spotify', 'artist_youtube', 'artist_facebook')
     search_fields = ['event_name', 'client_profile__client_business', 'event_host', 'event_genre']
     readonly_fields = ('slug',)
 
@@ -74,4 +74,11 @@ class GalleryDataAdmin(admin.ModelAdmin):
 
 
 
+@admin.register(TextSliderTop)
+class SliderTopAdmin(admin.ModelAdmin):
+    list_display = ('top_slider_title','top_slider_text')
 
+
+@admin.register(TextSliderBottom)
+class SliderBottomAdmin(admin.ModelAdmin):
+    list_display = ('bottom_slider_title','bottom_slider_text')

@@ -16,5 +16,7 @@ urlpatterns = [
     path('policy-data/', PolicyApiView.as_view(), name='policy_list'),
     path('gallery-data/', GalleryApiView.as_view(), name='gallery_data_list'),
     path('gallery-data/<slug:slug>/', GalleryApiView.as_view(), name='gallery_data_detail'),
+    path('slider-top/', TextSliderTopApiView.as_view(), name='slider_top_list'),
+    path('slider-bottom/', TextSliderBottomApiView.as_view(), name='slider_bottom_list'),
 
 ]

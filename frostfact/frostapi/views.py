@@ -74,3 +74,11 @@ class FaqApiView(BaseAuthenticatedView, generics.ListCreateAPIView):
 class GalleryApiView(BaseAuthenticatedView, generics.ListCreateAPIView):
     queryset = GalleryData.objects.all()
     serializer_class = GalleryDataSerializer
+
+class TextSliderTopApiView(BaseAuthenticatedView, generics.ListCreateAPIView):
+    queryset = TextSliderTop.objects.all()
+    serializer_class = TextSliderTopSerializer
+
+class TextSliderBottomApiView(BaseAuthenticatedView, generics.ListCreateAPIView):
+    queryset = TextSliderBottom.objects.all()
+    serializer_class = TextSliderBottomSerializer

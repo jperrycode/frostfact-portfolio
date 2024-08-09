@@ -30,6 +30,16 @@ class PolicyDataSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class TextSliderTopSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TextSliderTop
+        fields = '__all__'
+
+class TextSliderBottomSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TextSliderBottom
+        fields = '__all__'
+
 class GalleryDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = GalleryData

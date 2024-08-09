@@ -43,7 +43,21 @@ class EventDataAdmin(admin.ModelAdmin):
     search_fields = ['event_name', 'client_profile__client_business', 'event_host', 'event_genre']
     readonly_fields = ('slug',)
 
-
+    fields = (
+        'event_name',
+        'event_date',
+        'event_time',
+        'event_type',
+        'event_genre',
+        'event_host',
+        'event_image',
+        'artist_name',
+        'artist_instagram',
+        'artist_spotify',
+        'artist_youtube',
+        'artist_facebook'
+        'client_profile'
+    )
 
 @admin.register(FAQData)
 class FAQDataAdmin(admin.ModelAdmin):

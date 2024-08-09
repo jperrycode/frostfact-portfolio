@@ -76,9 +76,9 @@ class GalleryApiView(BaseAuthenticatedView, generics.ListCreateAPIView):
     serializer_class = GalleryDataSerializer
 
 class TextSliderTopApiView(BaseAuthenticatedView, generics.ListCreateAPIView):
-    queryset = TextSliderTop.objects.all()
+    queryset = TextSliderTop.objects.filter(active_text=True)
     serializer_class = TextSliderTopSerializer
 
 class TextSliderBottomApiView(BaseAuthenticatedView, generics.ListCreateAPIView):
-    queryset = TextSliderBottom.objects.all()
+    queryset = TextSliderBottom.objects.filter(active_text=True)
     serializer_class = TextSliderBottomSerializer

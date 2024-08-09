@@ -90,9 +90,26 @@ class GalleryDataAdmin(admin.ModelAdmin):
 
 @admin.register(TextSliderTop)
 class SliderTopAdmin(admin.ModelAdmin):
-    list_display = ('top_slider_title','top_slider_text')
+    list_display = ('top_slider_title','top_slider_text', 'active_text')
+
+
 
 
 @admin.register(TextSliderBottom)
 class SliderBottomAdmin(admin.ModelAdmin):
-    list_display = ('bottom_slider_title','bottom_slider_text')
+    list_display = ('bottom_slider_title','bottom_slider_text', 'active_text')
+
+    list_editable = ('active_text',)
+
+def save_model(self, request, obj, form, change):
+    if obj.active_text:
+        # Unselect all other entries
+        TextSliderBottom.objects.exclude(pk=obj.pk).update(active_text=False)
+    super().save_model(request, obj, form, change)
+
+def get_form(self, request, obj=None, **kwargs):
+    form = super().get_form(request, obj, **kwargs)
+    form.base_fields['active_text'].widget = admin.widgets.AdminRadioSelect(
+        choices=[(True, 'Active'), (False, 'Inactive')]
+    )
+    return form

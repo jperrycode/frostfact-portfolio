@@ -232,7 +232,9 @@ class GalleryData(models.Model):
 class TextSliderTop(models.Model):
     top_slider_title = models.CharField(max_length=20, blank=True, null=False, primary_key=True)
     top_slider_text = models.CharField(max_length=100, blank=True, null=True, verbose_name='Slider Top Text')
+    active_text = models.BooleanField(default=False, null=True, verbose_name='Active Text')
 
 class TextSliderBottom(models.Model):
     bottom_slider_title = models.CharField(max_length=20, blank=True, null=False, primary_key=True)
     bottom_slider_text = models.CharField(max_length=100, blank=True, null=True, verbose_name='Slider Bottom Text')
+    active_text = models.BooleanField(default=False, null=True, verbose_name='Active Text')

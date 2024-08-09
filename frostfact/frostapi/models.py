@@ -158,27 +158,21 @@ class PolicyData(models.Model):
 
 class GalleryData(models.Model):
 
-    class MediaChoices(models.TextChoices):
-        IMAGE = 'Image', 'Image'
-        VIDEO = 'Video', 'Video'
+
 
     gallery_media_title = models.CharField(max_length=100, blank=True, null=True, verbose_name='Image/Video Title')
     gallery_media_description = models.TextField(blank=True, null=True, verbose_name='Image/Video Description')
     gallery_media_image = models.ImageField(upload_to='gallery', blank=True, null=True, verbose_name='Image Upload')
     gallery_media_video = models.URLField(validators=[URLValidator()], blank=True, null=True, verbose_name='Video Link')
-    gallery_media_choices = models.TextField(max_length=10, choices=MediaChoices, default=MediaChoices.IMAGE)
+
     slug = models.SlugField(unique=True, blank=True, null=True, verbose_name="gallery Slug", editable=False)
     class Meta:
         verbose_name_plural = 'Gallery Data'
 
-    def clean(self):
-        if self.gallery_media_choices == self.MediaChoices.IMAGE and not self.gallery_media_image:
-            raise ValidationError("Image is required when 'Image' is selected.")
-        if self.gallery_media_choices == self.MediaChoices.VIDEO and not self.gallery_media_video:
-            raise ValidationError("Video URL is required when 'Video' is selected.")
+
 
     def save(self, *args, **kwargs):
-        self.full_clean()
+
         if not self.slug:
             self.slug = generate_unique_slug(GalleryData, self.gallery_media_title)
 

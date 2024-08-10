@@ -140,6 +140,8 @@ class EventData(models.Model):
 
     class Meta:
         ordering = ['event_date']
+        verbose_name_plural = 'Event Data'
+        verbose_name = 'Event Data'
 
 class FAQData(models.Model):
     faq_title = models.CharField(max_length=100, blank=True, null=True, verbose_name='FAQ Title')
@@ -167,9 +169,10 @@ class GalleryData(models.Model):
     gallery_media_image = models.ImageField(upload_to='gallery', blank=True, null=True, verbose_name='Image Upload')
     gallery_media_video = models.URLField(validators=[URLValidator()], blank=True, null=True, verbose_name='Video Link')
     gallery_media_date = models.DateTimeField(default=timezone.now, verbose_name="Image/Video Date")
-    gallery_media_type = models.CharField(max_length=100, choices=MediaChoices, blank=True, null=True, verbose_name='Image/Video Author')
+    gallery_media_type = models.CharField(max_length=100, choices=MediaChoices, blank=True, null=True, verbose_name='Media Type')
     slug = models.SlugField(unique=True, blank=True, null=True, verbose_name="gallery Slug", editable=False)
     class Meta:
+        verbose_name = 'Gallery Data'
         verbose_name_plural = 'Gallery Data'
 
 
